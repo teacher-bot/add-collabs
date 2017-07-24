@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "probot run ./index.js",
+    "test": "xo",
+    "dev": "LOG_LEVEL=trace npm start"
+  },
+  "dependencies": {
+    "js-yaml": "^3.9.0",
+    "probot": "^0.7.2"
+  },
+  "devDependencies": {
+    "localtunnel": "^1.8.2",
+    "xo": "^0.18.2"
+  },
+  "engines": {
+    "node": ">= 7.7.0",
+    "npm": ">= 4.0.0"
+  },
+  "xo": {
+    "space": 2
+  }
+}
