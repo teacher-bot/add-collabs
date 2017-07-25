@@ -1,4 +1,5 @@
 {
+  "name": "add-collabs",
   "private": true,
   "scripts": {
     "start": "probot run ./index.js",
