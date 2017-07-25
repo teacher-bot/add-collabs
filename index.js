@@ -1,3 +1,4 @@
+global.__base = __dirname + '/';
 const configs = require('configurable');
 
 // A plugin is a Node module that exports a function which takes a `robot` argument
