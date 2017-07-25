@@ -1,4 +1,4 @@
-const yaml = require('js-yaml');
+const configs = require('configurable');
 
 // A plugin is a Node module that exports a function which takes a `robot` argument
 module.exports = robot => {
@@ -7,22 +7,9 @@ module.exports = robot => {
     const {issue, action} = context.payload;
     const issueOwner = issue.user.login;
     const repo = context.repo({username: issueOwner});
-    const path = '.github/teacherbot.yml';
-    let config;
 
-    try {
-      const res = await context.github.repos.getContent(context.repo({path}));
-      config = yaml.load(Buffer.from(res.data.content, 'base64').toString()) || {};
-    } catch (err) {
-      //robot.log("**** was unable to load the config file, using default");
-      //robot.log(err);
+    const config = await configs(context, './lib/defaults');
 
-      config = Object.assign( {}, require('./lib/defaults.js') || {} );
-    }
-
-    //robot.log("Config file loaded! here it is:");
-
-    //robot.log(config);
 
     if (action === 'opened') {
       const isCollab = await context.github.repos.checkCollaborator(repo)

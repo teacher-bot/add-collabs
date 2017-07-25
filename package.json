@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "js-yaml": "^3.9.0",
-    "probot": "^0.7.2"
+    "probot": "^0.7.2",
+    "teacher-bot-configs": "teacher-bot/configurable"    
   },
   "devDependencies": {
     "localtunnel": "^1.8.2",
