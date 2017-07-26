@@ -9,7 +9,7 @@ module.exports = robot => {
     const issueOwner = issue.user.login;
     const repo = context.repo({username: issueOwner});
 
-    const config = await configs(context, './lib/defaults');
+    const config = await configs(context, './lib/defaults', 'teacherbot.yml');
 
 
     if (action === 'opened') {
