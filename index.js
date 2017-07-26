@@ -1,3 +1,5 @@
+const configurable = require('configurable');
+
 /**
  * @typedef {Object} Config
  * @prop {string} existingCollaboratorMessage
@@ -5,10 +7,13 @@
  *
  * Anytime a user opens an issue, add them as a collaborator to the repository.
  * @param {Object} robot
- * @param {Config} config
+ * @param {Config} [defaults]
+ * @param {string} [configFilename]
  */
-module.exports = (robot, config) => {
+module.exports = (robot, defaults = {}, configFilename = 'add-collabs.yml') => {
   robot.on('issues.opened', async context => {
+    const config = await configurable(context, defaults, configFilename);
+
     const {issue, action} = context.payload;
     const issueOwner = issue.user.login;
     const repo = context.repo({username: issueOwner});
