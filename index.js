@@ -1,6 +1,3 @@
-global.__base = __dirname + '/';
-const configs = require('configurable');
-
 // A plugin is a Node module that exports a function which takes a `robot` argument
 module.exports = robot => {
   robot.on('issues', async context => {
@@ -9,7 +6,14 @@ module.exports = robot => {
     const issueOwner = issue.user.login;
     const repo = context.repo({username: issueOwner});
 
-    const config = await configs(context, './lib/defaults');
+    let config;
+
+    try {
+      config = await context.config('teacherbot.yml');
+    }
+      catch(err) {
+        config = Object.assign( {}, require('./lib/defaults.js') || {} );
+      }
 
 
     if (action === 'opened') {
