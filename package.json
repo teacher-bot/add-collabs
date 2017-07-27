@@ -8,7 +8,6 @@
     "dev": "LOG_LEVEL=trace npm start"
   },
   "dependencies": {
-    "js-yaml": "^3.9.0",
     "probot": "^0.8.0"
   },
   "devDependencies": {
