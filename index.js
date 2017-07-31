@@ -6,9 +6,10 @@
   * Anytime a user opens an issue, add them as a collaborator to the repository.
   * @param {Object} robot
   * @param {Config} [defaults]
+  * @param {string} [configFilename]
   */
 
-module.exports = (robot, defaults = {}) => {
+module.exports = (robot, defaults = {}, configFilename = 'add-collabs.yml') => {
     let config;
 
     defaults = Object.assign({}, {
@@ -25,7 +26,7 @@ module.exports = (robot, defaults = {}) => {
     const repo = context.repo({username: issueOwner});
 
     try {
-      config = await context.config('teacherbot.yml');
+      config = await context.config( configFilename );
     } catch (err) {
       config = defaults;
     }
