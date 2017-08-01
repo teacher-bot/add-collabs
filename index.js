@@ -1,3 +1,13 @@
+const defaultsShape = {
+  existingCollaboratorMessage: 'string',
+  newCollaboratorMessage: 'string',
+};
+
+function checkForDefaults() {
+  const errors = Object.keys(defaultsShape).filter(key => !Object.prototype.hasOwnProperty.call(defaults, key));
+  if (errors.length > 0) errors.forEach(err => console.error(`Key \`${err}\` of type \`${defaultsShape[err]}\` is missing.`));
+}
+
 /**
   * @typedef {Object} Config
   * @prop {string} existingCollaboratorMessage
@@ -5,44 +15,32 @@
   *
   * Anytime a user opens an issue, add them as a collaborator to the repository.
   * @param {Object} robot
-  * @param {Config} [defaults]
+  * @param {Config} defaults
   * @param {string} [configFilename]
   */
+module.exports = (robot, defaults, configFilename = 'add-collabs.yml') => {
+  checkForDefaults(defaults);
 
-module.exports = (robot, defaults = {}, configFilename = 'add-collabs.yml') => {
-    let config;
-
-    defaults = Object.assign({}, {
-      addCollaborators: {
-        newCollaboratorMessage: 'Hi! I\'m the friendly :robot: of this repo.\n\nWe\'re happy you\'re here :wave:. Everyone is welcome here, so I\'m making you a collaborator. This will give you access to commit on this repo.',
-        existingCollaboratorMessage: 'Hi! I\'m the friendly :robot: of this repo.\n\nI can see that you\'re already a collaborator. Any other issues are above my paygrade at the moment, so we\'ll have to wait for a pesky hu-man. Not to worry though, they\'ll drop by within 24 hours to answer your questions!'
-      }
-    }, defaults || {});
-
-    robot.on('issues', async context => {
-
+  robot.on('issues.opened', async context => {
     const {issue, action} = context.payload;
     const issueOwner = issue.user.login;
+
     const repo = context.repo({username: issueOwner});
 
-    try {
-      config = await context.config( configFilename );
-    } catch (err) {
-      config = defaults;
-    }
+    const repoConfig = await context.config(configFilename);
+    const config = Object.assign({}, defaults, repoConfig);
 
-    if (action === 'opened') {
-      const isCollab = await context.github.repos.checkCollaborator(repo)
-        .catch(() => {
-          context.github.repos.addCollaborator(repo);
-        });
-      const params = {
-        number: issue.number,
-        body: isCollab ? config.addCollaborators.existingCollaboratorMessage : config.addCollaborators.newCollaboratorMessage
-      };
-      // / When testing, uncomment the line below and comment the return line -- this avoids the bot getting marked as spam.
-      // robot.log("This is the params", params);
-      return context.github.issues.createComment(context.repo(params));
-    }
+    const isCollab = await context.github.repos.checkCollaborator(repo)
+      .catch(() => {
+        context.github.repos.addCollaborator(repo);
+      });
+
+    const params = {
+      number: issue.number,
+      body: isCollab ? config.existingCollaboratorMessage : config.newCollaboratorMessage,
+    };
+    // / When testing, uncomment the line below and comment the return line -- this avoids the bot getting marked as spam.
+    // robot.log("This is the params", params);
+    return context.github.issues.createComment(context.repo(params));
   });
 };
