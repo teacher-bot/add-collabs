@@ -27,14 +27,13 @@ module.exports = (robot, defaults, configFilename = 'add-collabs.yml') => {
 
     const repo = context.repo({username: issueOwner});
 
-    let repoConfig;
+    let config;
     try {
-      repoConfig = await context.config(configFilename);
+      const {addCollaborators} = await context.config(configFilename);
+      config = Object.assign(defaults, addCollaborators);
     } catch (err) {
-      repoConfig = defaults;
+      config = defaults;
     }
-
-    const config = Object.assign(defaults, repoConfig);
 
     const isCollab = await context.github.repos.checkCollaborator(repo)
       .catch(() => {
