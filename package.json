@@ -1,6 +1,10 @@
 {
   "name": "add-collabs",
   "version": "0.0.1",
+  "description": "a plugin to add collaborators automatically to repositories",
+  "author": "GitHub, Inc.",
+  "license": "ISC",
+  "repository": "https://github.com/teacher-bot/add-collabs",
   "private": true,
   "scripts": {
     "start": "probot run ./index.js",
