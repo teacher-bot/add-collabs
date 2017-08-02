@@ -21,18 +21,15 @@ addCollaborators:
 
 Perhaps you want people to be able to add labels to their own newly created issues, or you want your users to automatically become collaborators as part of a [tutorial or self-paced course](https://services.github.com/on-demand/intro-to-github/join-class-repository). The possibilities are endless.
 
-### Permissions
-
-When you enable this app, it will have [access to certain permissions](https://developer.github.com/v3/apps/permissions/). You will need to select:
-- Read access to code
-- Read access to metadata and single file
-- Read and write access to administration, commit statuses, issues, and pull requests
-
 ### Features
 
 - Responds to newly opened issues.
 - Allows for customized responses.
 - Grants individuals collaborator access upon the creation of an issue.
+
+### Running your own instance of this app
+
+See [docs/deploy.md](docs/deploy.md) if you would like to run your own instance of this plugin.
 
 ### Getting Help and Contributing
 
@@ -40,6 +37,4 @@ Just open a new issue in this repo if you find a bug, have a suggestion, or woul
 
 # Made with :heart: by :octocat:s and friends
 
-This Probot plugin is made by the friendly :octocat:s from GitHub Professional Services with help from the open source community. This plugin is an extension of the paid engagements that we provide to companies large and small. If you are intersted in how GitHub Professional Services can help you and your team or organization, [contact us](https://services.github.com/contact/).
-
-For information regarding the different engagements we provide, please refer to the [Services](https://services.github.com/) web site.
+This Probot plugin is made by the friendly :octocat:s from [GitHub Professional Services](https://services.github.com) with help from the open source community. This plugin is used during the training engagements that we provide.
