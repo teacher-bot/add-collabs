@@ -30,7 +30,7 @@ module.exports = (robot, defaults, configFilename = 'add-collabs.yml') => {
     let config;
     try {
       const {addCollaborators} = await context.config(configFilename);
-      config = Object.assign(defaults, addCollaborators);
+      config = Object.assign({}, defaults, addCollaborators);
     } catch (err) {
       config = defaults;
     }
