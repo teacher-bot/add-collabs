@@ -2,6 +2,18 @@
 
 This [Probot](https://github.com/probot/probot/) [plugin](https://github.com/probot/probot/#plugins) automatically adds individuals that open a new issue as collaborators in your repository.
 
+![add-collabs](https://user-images.githubusercontent.com/9950121/28890301-9e90bd46-7794-11e7-851f-456043ba665d.gif)
+
+### But why?
+
+Perhaps you want people to be able to add labels to their own newly created issues, or you want your users to automatically become collaborators as part of a [tutorial or self-paced course](https://services.github.com/on-demand/intro-to-github/join-class-repository). The possibilities are endless.
+
+### Features
+
+- Responds to newly opened issues.
+- Allows for customized responses.
+- Grants individuals collaborator access upon the creation of an issue.
+
 ### Get Started
 
 1. Install this app
@@ -16,16 +28,6 @@ addCollaborators:
   newCollaboratorMessage: "This message will appear when someone opens a new issue, and is not already a collaborator."
   existingCollaboratorMessage: "This message appears when someone is already a collaborator and they open a new issue."
 ```
-
-### But why?
-
-Perhaps you want people to be able to add labels to their own newly created issues, or you want your users to automatically become collaborators as part of a [tutorial or self-paced course](https://services.github.com/on-demand/intro-to-github/join-class-repository). The possibilities are endless.
-
-### Features
-
-- Responds to newly opened issues.
-- Allows for customized responses.
-- Grants individuals collaborator access upon the creation of an issue.
 
 ### Running your own instance of this app
 
