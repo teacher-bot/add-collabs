@@ -48,4 +48,13 @@ module.exports = (robot, defaults, configFilename = 'add-collabs.yml') => {
     // robot.log("This is the params", params);
     return context.github.issues.createComment(context.repo(params));
   });
+
+  console.log('Yay, the teacher-bot/add-collabs plugin was loaded!');
+
+  // For more information on building plugins:
+  // https://github.com/probot/probot/blob/master/docs/plugins.md
+
+  // To get your plugin running against GitHub, see:
+  // https://github.com/probot/probot/blob/master/docs/development.md
+
 };
