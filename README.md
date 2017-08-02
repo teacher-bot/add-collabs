@@ -24,10 +24,9 @@ Perhaps you want people to be able to add labels to their own newly created issu
 ### Permissions
 
 When you enable this app, it will have [access to certain permissions](https://developer.github.com/v3/apps/permissions/). You will need to select:
-- `GET /repositories/:repository_id/collaborators`
-- `GET /repositories/:repository_id/collaborators/`:collab
-- `POST /repositories/:repository_id/issues/:id/comments` (:write) [A]
-- `GET /repositories/:repository_id/issues` (:read) [B]
+- Read access to code
+- Read access to metadata and single file
+- Read and write access to administration, commit statuses, issues, and pull requests
 
 ### Features
 
